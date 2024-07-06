@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Why Should We Care?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+        }
+        .outer-container {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            animation: fadein 1.7s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .module-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadein 1.7s ease-in-out;
+            margin-top: 20px;
+        }
+        .container {
+            background-color: #bae9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadein 1.7s ease-in-out forwards;
+        }
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            opacity: 0;
+            animation: fadein 1.7s ease-in-out forwards;
+        }
+        .stats-box {
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            width: 45%;
+        }
+        .input-section, .output-section {
+            margin: 20px 0;
+        }
+        .submit-button, .continue-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .submit-button:hover, .continue-button:hover {
+            background-color: #0056b3;
+        }
+        .module-text {
+            max-width: 800px;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        ul {
+            padding-left: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body onload="maximizeWindow()">
+    <div class="outer-container">
+        <div class="module-text">
+            <h2>Why Should We Care?</h2>
+            <div class="container" style="animation-delay: 1.7s;">
+                <p>Neural networks are not a new invention. They have been around since Warren McCullough and Walter Pitts invented them at the University of Chicago 70 years ago.</p>
+            </div>
+            <div class="container" style="animation-delay: 3.4s;">
+                <p>What is new is their omnipresence:</p>
+            </div>
+            <div class="stats-container" style="animation-delay: 5.1s;">
+                <div class="stats-box">
+                    <h3>In Industry</h3>
+                    <ul>
+                        <li>22% of firms are aggressively integrating AI, 33% have limited implementation, and 45% are in the exploration phase.</li>
+                        <li>AI is used for improving operations (56%), cybersecurity (51%), digital assistants (47%), customer relationship management (46%), and inventory management (40%).</li>
+                        <li>The global AI market was valued at $136.55 billion in 2022 and is projected to reach $407 billion by 2027, with a compound annual growth rate of 36.2%.</li>
+                    </ul>
+                </div>
+                <div class="stats-box">
+                    <h3>In Education</h3>
+                    <ul>
+                        <li>67% of teenagers have heard of ChatGPT, indicating a broad awareness of AI tools among youth.</li>
+                        <li>Among those who know ChatGPT, 19% have used it for schoolwork, with this figure rising to 24% among 11th and 12th graders.</li>
+                        <li>69% of teens find it acceptable to use ChatGPT for researching new topics, 39% for solving math problems, and 20% for writing essays.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container" style="animation-delay: 6.8s;">
+                <p>Given this widespread use, and the importance of tasks being delegated to this technology, treating neural networks as a “black box” is unacceptable. If we are to evaluate the capabilities and risks of this technology, we need to understand what is actually taking place under the hood.</p>
+            </div>
+        </div>
+        <div class="module-container">
+            <button class="continue-button" onclick="location.href='thePlan.html'">Next</button>
+        </div>
+    </div>
+    <script>
+        // Apply the fade-in effect to each container with delay
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.container, .stats-box');
+            containers.forEach((container, index) => {
+                container.style.animationDelay = `${(index + 1) * 1.1}s`;
+            });
+        });
+
+        // Maximize the window
+        function maximizeWindow() {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+        }
+
+        // Close the program when the window is closed
+        window.addEventListener('beforeunload', function (e) {
+            if (eel) {
+                eel.close_program();
+            }
+        });
+    </script>
+</body>
+</html>

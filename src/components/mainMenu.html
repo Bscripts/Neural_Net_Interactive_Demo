@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+        }
+        .outer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            animation: fadein 1.7s ease-in-out;
+        }
+        .title-box {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadein 1.7s ease-in-out forwards;
+        }
+        .title-box h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #007bff;
+        }
+        .title-box p {
+            margin: 10px 0 0;
+            font-size: 1.2em;
+            color: #0056b3;
+        }
+        .start-button {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .start-button:hover {
+            background-color: #0056b3;
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body onload="maximizeWindow()">
+    <div class="outer-container">
+        <div class="title-box">
+            <h1>Neural Networks</h1>
+            <p>An interactive explanation by Brian Avner</p>
+        </div>
+        <a href="whyCare.html" class="start-button">Start</a>
+    </div>
+    <script>
+        // Maximize the window
+        function maximizeWindow() {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+        }
+
+        // Close the program when the window is closed
+        window.addEventListener('beforeunload', function (e) {
+            if (typeof eel !== 'undefined') {
+                eel.close_program();
+            }
+        });
+    </script>
+</body>
+</html>

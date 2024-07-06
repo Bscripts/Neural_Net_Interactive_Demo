@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transformer Neural Network</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .outer-container {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+        }
+        .module-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .container {
+            background-color: #bae9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadein 1.7s ease-in-out forwards;
+        }
+        .input-section, .output-section {
+            margin: 20px 0;
+        }
+        .submit-button, .continue-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .submit-button:hover, .continue-button:hover {
+            background-color: #0056b3;
+        }
+        .module-text {
+            max-width: 800px;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .svg-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .svg-container text {
+            font-size: 10px;
+            text-anchor: middle;
+            fill: white;
+        }
+        .circle {
+            fill: #007bff;
+            stroke: none;
+        }
+        .rect {
+            fill: #007bff;
+            stroke: none;
+        }
+        .line {
+            stroke: black;
+            stroke-width: 3;
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body onload="maximizeWindow()">
+    <div class="outer-container">
+        <div class="module-text">
+            <h2>The Neural Network</h2>
+            <div class="container" style="animation-delay: 1.7s;">
+                <p>Once these binary activation functions have been created and associated with expected outputs, they are arranged into essentially a giant, one-way flowchart. Criteria dependent on other criteria are positioned later in the flow (Why would I check if something has a tail if I know it is a utensil?).</p>
+            </div>
+            <div class="container" style="animation-delay: 3.4s;">
+                <p>Try entering some foods to see how the algorithm evaluates them.</p>
+            </div>
+        </div>
+        <div class="module-container">
+            <div class="svg-container">
+                <h1>Transformer Neural Network</h1>
+                <svg height="500" width="1000">
+                    <!-- Lines -->
+                    <line x1="400" y1="50" x2="250" y2="170" class="line" />
+                    <line x1="400" y1="50" x2="550" y2="170" class="line" />
+
+                    <line x1="250" y1="170" x2="160" y2="320" class="line" />
+                    <line x1="250" y1="170" x2="340" y2="320" class="line" />
+                    <line x1="550" y1="170" x2="460" y2="320" class="line" />
+                    <line x1="550" y1="170" x2="640" y2="320" class="line" />
+
+                    <line x1="180" y1="320" x2="250" y2="390" class="line" />
+                    <line x1="320" y1="320" x2="250" y2="390" class="line" />
+                    <line x1="480" y1="320" x2="550" y2="390" class="line" />
+                    <line x1="620" y1="320" x2="550" y2="390" class="line" />
+
+                    <!-- Rectangles and Circles -->
+                    <g>
+                        <rect x="290" y="20" width="220" height="60" class="rect"></rect>
+                        <foreignObject x="290" y="20" width="220" height="60">
+                            <div class="input-section">
+                                <input type="text" id="foodToEvaluate" placeholder="Enter a food" style="width: 70%; padding: 10px; border-radius: 5px; border: none; font-size: 1em;">
+                                <button id="submitButton" class="submit-button">Submit</button>
+                            </div>
+                        </foreignObject>
+                    </g>
+                    <g id="tastyCriteriaGroup">
+                        <circle cx="250" cy="170" r="50" class="circle" id="tastyCircle"></circle>
+                        <text x="250" y="160" font-size="10" id="tastyCriteriaText">Tasty criteria</text>
+                        <text x="250" y="180" font-size="10" id="tastyCriteriaText2">generated on previous page</text>
+                    </g>
+                    <g id="notTastyCriteriaGroup">
+                        <circle cx="550" cy="170" r="50" class="circle" id="notTastyCircle"></circle>
+                        <text x="550" y="160" font-size="10" id="notTastyCriteriaText">Not tasty criteria</text>
+                        <text x="550" y="180" font-size="10" id="notTastyCriteriaText2">generated on previous page</text>
+                    </g>
+                    <g id="subActivationLeft1Group">
+                        <circle cx="180" cy="280" r="50" class="circle" id="subActivationLeft1"></circle>
+                        <text x="180" y="270" font-size="10" id="subActivationLeft1Text">Sub "Tasty"</text>
+                        <text x="180" y="290" font-size="10" id="subActivationLeft1Text2">activation function</text>
+                    </g>
+                    <g id="subActivationLeft2Group">
+                        <circle cx="320" cy="280" r="50" class="circle" id="subActivationLeft2"></circle>
+                        <text x="320" y="270" font-size="10" id="subActivationLeft2Text">Sub "Tasty"</text>
+                        <text x="320" y="290" font-size="10" id="subActivationLeft2Text2">activation function</text>
+                    </g>
+                    <g id="subActivationRight1Group">
+                        <circle cx="480" cy="280" r="50" class="circle" id="subActivationRight1"></circle>
+                        <text x="480" y="270" font-size="10" id="subActivationRight1Text">Sub "Not Tasty"</text>
+                        <text x="480" y="290" font-size="10" id="subActivationRight1Text2">activation function</text>
+                    </g>
+                    <g id="subActivationRight2Group">
+                        <circle cx="620" cy="280" r="50" class="circle" id="subActivationRight2"></circle>
+                        <text x="620" y="270" font-size="10" id="subActivationRight2Text">Sub "Not Tasty"</text>
+                        <text x="620" y="290" font-size="10" id="subActivationRight2Text2">activation function</text>
+                    </g>
+                    <g id="tastyOutputGroup">
+                        <circle cx="250" cy="390" r="50" class="circle" id="tastyOutputCircle"></circle>
+                        <text x="250" y="390" font-size="10" id="tastyOutputText">Tasty</text>
+                    </g>
+                    <g id="notTastyOutputGroup">
+                        <circle cx="550" cy="390" r="50" class="circle" id="notTastyOutputCircle"></circle>
+                        <text x="550" y="390" font-size="10" id="notTastyOutputText">Not Tasty</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="module-text">
+            <div class="container" style="animation-delay: 1.7s;">
+                <p>This is a very small network. GPT-4 has 120 layers containing 1.8 trillion total nodes. Still, the logic is the same.</p>
+            </div>
+            <div class="container" style="animation-delay: 3.4s;">
+                <p>Here’s the kicker: After creating this network, the model does what you just did; over and over and over. It takes inputs with known outputs, runs it through the system, and sees if it got it correct (no way chocolate should output “Not Tasty”!). This is called "iteration". It then uses these results to go back and tweak the system. This is called "refinement". This cycle continues until the neural net passes some threshold success rate.</p>
+            </div>
+            <div class="output-section">
+                <button id="continueButton" class="continue-button" onclick="location.href='GPTSimUI.html'">Continue</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../eel.js"></script>
+    <script>
+        async function setCriteriaTexts() {
+            const tastyCriteria = await eel.getTastyCriteria()();
+            const notTastyCriteria = await eel.getNotTastyCriteria()();
+            document.getElementById('tastyCriteriaText').textContent = tastyCriteria.split('\n')[0];
+            document.getElementById('tastyCriteriaText2').textContent = tastyCriteria.split('\n')[1];
+            document.getElementById('notTastyCriteriaText').textContent = notTastyCriteria.split('\n')[0];
+            document.getElementById('notTastyCriteriaText2').textContent = notTastyCriteria.split('\n')[1];
+        }
+
+        async function submitFood() {
+            const foodToEvaluate = document.getElementById('foodToEvaluate').value;
+
+            // Change both criteria circles to yellow and text to black
+            document.getElementById('tastyCircle').style.fill = 'yellow';
+            document.getElementById('tastyCriteriaText').style.fill = 'black';
+            document.getElementById('tastyCriteriaText2').style.fill = 'black';
+            document.getElementById('notTastyCircle').style.fill = 'yellow';
+            document.getElementById('notTastyCriteriaText').style.fill = 'black';
+            document.getElementById('notTastyCriteriaText2').style.fill = 'black';
+
+            // Wait for 2 seconds
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            const result = await eel.getFoodToEvaluate(foodToEvaluate)();
+            console.log("Result: ", result);
+
+            let subActivation1, subActivation2, outputCircle, outputText;
+            if (result === "0") {
+                // Not tasty
+                document.getElementById('tastyCircle').style.fill = 'red';
+                document.getElementById('tastyCriteriaText').style.fill = 'white';
+                document.getElementById('tastyCriteriaText2').style.fill = 'white';
+                document.getElementById('notTastyCircle').style.fill = 'green';
+                document.getElementById('notTastyCriteriaText').style.fill = 'white';
+                document.getElementById('notTastyCriteriaText2').style.fill = 'white';
+                subActivation1 = document.getElementById('subActivationRight1');
+                subActivation2 = document.getElementById('subActivationRight2');
+                outputCircle = document.getElementById('notTastyOutputCircle');
+                outputText = document.getElementById('notTastyOutputText');
+            } else if (result === "1") {
+                // Tasty
+                document.getElementById('tastyCircle').style.fill = 'green';
+                document.getElementById('tastyCriteriaText').style.fill = 'white';
+                document.getElementById('tastyCriteriaText2').style.fill = 'white';
+                document.getElementById('notTastyCircle').style.fill = 'red';
+                document.getElementById('notTastyCriteriaText').style.fill = 'white';
+                document.getElementById('notTastyCriteriaText2').style.fill = 'white';
+                subActivation1 = document.getElementById('subActivationLeft1');
+                subActivation2 = document.getElementById('subActivationLeft2');
+                outputCircle = document.getElementById('tastyOutputCircle');
+                outputText = document.getElementById('tastyOutputText');
+            }
+
+            // Change sub activation function circles to yellow and text to black
+            subActivation1.style.fill = 'yellow';
+            document.getElementById(subActivation1.id + 'Text').style.fill = 'black';
+            document.getElementById(subActivation1.id + 'Text2').style.fill = 'black';
+            subActivation2.style.fill = 'yellow';
+            document.getElementById(subActivation2.id + 'Text').style.fill = 'black';
+            document.getElementById(subActivation2.id + 'Text2').style.fill = 'black';
+
+            // Wait for 2 seconds
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Change sub activation function circles to green and text to white
+            subActivation1.style.fill = 'green';
+            document.getElementById(subActivation1.id + 'Text').style.fill = 'white';
+            document.getElementById(subActivation1.id + 'Text2').style.fill = 'white';
+            subActivation2.style.fill = 'green';
+            document.getElementById(subActivation2.id + 'Text').style.fill = 'white';
+            document.getElementById(subActivation2.id + 'Text2').style.fill = 'white';
+
+            // Change the final output circle to yellow and text to black
+            outputCircle.style.fill = 'yellow';
+            outputText.style.fill = 'black';
+
+            // Wait for 2 seconds
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Change the final output circle to green and text to white
+            outputCircle.style.fill = 'green';
+            outputText.style.fill = 'white';
+
+            // Wait for 2 seconds
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Reset all circles to blue after 1 second
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            resetCircles();
+        }
+
+        function resetCircles() {
+            const circleElements = document.querySelectorAll('.circle');
+            const textElements = document.querySelectorAll('text');
+
+            circleElements.forEach(circle => {
+                circle.style.fill = '#007bff';
+            });
+
+            textElements.forEach(text => {
+                text.style.fill = 'white';
+            });
+        }
+
+        function maximizeWindow() {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('submitButton').addEventListener('click', submitFood);
+            document.getElementById('foodToEvaluate').addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    submitFood();
+                }
+            });
+            setCriteriaTexts(); // Set criteria texts on page load
+        });
+    </script>
+</body>
+</html>

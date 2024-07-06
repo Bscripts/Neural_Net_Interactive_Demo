@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+        }
+        .outer-container {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            animation: fadein 1s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .module-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadein 1s ease-in-out;
+            margin-top: 20px; /* Added to reduce the gap */
+        }
+        .container {
+            background-color: #bae9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadein 1s ease-in-out forwards;
+        }
+        .input-section, .output-section {
+            margin: 20px 0;
+        }
+        .submit-button, .continue-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .submit-button:hover, .continue-button:hover {
+            background-color: #0056b3;
+        }
+        .module-text {
+            max-width: 800px;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        ul {
+            padding-left: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body onload="maximizeWindow()">
+    <div class="outer-container">
+        <div class="module-text">
+            <h2>The Plan</h2>
+            <div class="container" style="animation-delay: 1s;">
+                <p>To understand their inner workings, we are going to engage in the process of creating a neural network through several interactive demonstrations, from processing input data to text generation. These demonstrations are powered by custom, GPT-4 integrated applications that simulate the decision making of neural nets (The same technology powering GPT-4 itself, how meta!).</p>
+            </div>
+            <div class="container" style="animation-delay: 2s;">
+                <p>The process of creating a neural network consists of three parts:</p>
+            </div>
+            <div class="container" style="animation-delay: 3s;">
+                <ul>
+                    <li>Input Computation</li>
+                    <li>Output Generation</li>
+                    <li>Iterative Refinement</li>
+                </ul>
+            </div>
+            <div class="container" style="animation-delay: 4s;">
+                <p>It is important to note that neural networks are mostly used for tasks other than generating text. Text generation is the most culturally relevant right now, but the logic we are about to explore can be widely applied.</p>
+            </div>
+        </div>
+        <div class="module-container">
+            <button class="continue-button" onclick="location.href='trainingSim.html'">Continue</button>
+        </div>
+    </div>
+    <script>
+        // Apply the fade-in effect to each container with delay
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach((container, index) => {
+                container.style.animationDelay = `${(index + 1) * 1}s`;
+            });
+        });
+
+        // Maximize the window
+        function maximizeWindow() {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+        }
+
+        // Close the program when the window is closed
+        window.addEventListener('beforeunload', function (e) {
+            if (eel) {
+                eel.close_program();
+            }
+        });
+    </script>
+</body>
+</html>

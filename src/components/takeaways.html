@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Takeaways</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+        }
+        .outer-container {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            animation: fadein 1.7s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .module-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadein 1.7s ease-in-out;
+            margin-top: 20px;
+        }
+        .container {
+            background-color: #bae9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadein 1.7s ease-in-out forwards;
+        }
+        .input-section, .output-section {
+            margin: 20px 0;
+        }
+        .submit-button, .continue-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .submit-button:hover, .continue-button:hover {
+            background-color: #0056b3;
+        }
+        .module-text {
+            max-width: 800px;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            opacity: 0;
+            animation: fadein 1.7s ease-in-out forwards;
+        }
+        .stats-box {
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            width: 45%;
+        }
+        ul {
+            padding-left: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body onload="maximizeWindow()">
+    <div class="outer-container">
+        <div class="module-text">
+            <h2>Takeaways</h2>
+            <div class="container" style="animation-delay: 1.7s;">
+                <p>Now that we have a general idea of what these neural networks actually do, we can better make sense of their merits and shortcomings.</p>
+            </div>
+            <div class="container" style="animation-delay: 3.4s;">
+                <p>The following are taken from a technical report on the performance of GPT-4 in various tasks:</p>
+            </div>
+            <div class="stats-container" style="animation-delay: 5.1s;">
+                <div class="stats-box">
+                    <h3>Notable Successes</h3>
+                    <ul>
+                        <li>LSAT Performance: Scored 163 (88th percentile).</li>
+                        <li>SAT Scores: Achieved 710 in Reading and Writing, and 700 in Math.</li>
+                        <li>AP Exam Results: Scored 5’s and 4’s in STEM and Economics subjects.</li>
+                    </ul>
+                </div>
+                <div class="stats-box">
+                    <h3>Notable Failures</h3>
+                    <ul>
+                        <li>AP English Exams: Scored 2’s on both AP English Language and Composition and AP English Literature and Composition.</li>
+                        <li>Leetcode Programming: Achieved only 3/45 on hard programming problems, highlighting difficulty with tasks requiring abstract reasoning.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container" style="animation-delay: 6.8s;">
+                <p>These begin to make more sense when you think about these models as probability machines. George Washington will always be the first president, so it is likely to get that correct on a history exam. For problems that take more abstract reasoning and/or inventiveness, such as complicated literary analysis and difficult programming problems, of course the model is going to struggle. It generalizes thought, it doesn’t create it.</p>
+            </div>
+            <div class="container" style="animation-delay: 8.5s;">
+                <p>My opinion is that these models are useful for automating repetitive tasks, and creating insights that can then be evaluated by a human. They are general enough to account for some variance in input, but not flexible enough to innovate.</p>
+            </div>
+            <div class="container" style="animation-delay: 10.2s;">
+                <p>That said, I don’t think people should stop experimenting with applying neural networks to complicated tasks, so long as they truly understand the tool they’re using and account for its limitations and inherent reliability issues.</p>
+            </div>
+        </div>
+        <div class="module-container">
+            <button class="continue-button" onclick="location.href='mainMenu.html'">Finish</button>
+        </div>
+    </div>
+    <script>
+        // Apply the fade-in effect to each container with delay
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.container, .stats-box');
+            containers.forEach((container, index) => {
+                container.style.animationDelay = `${(index + 1) * 1}s`;
+            });
+        });
+
+        // Maximize the window
+        function maximizeWindow() {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+        }
+
+        // Close the program when the window is closed
+        window.addEventListener('beforeunload', function (e) {
+            if (typeof eel !== 'undefined') {
+                eel.close_program();
+            }
+        });
+    </script>
+</body>
+</html>

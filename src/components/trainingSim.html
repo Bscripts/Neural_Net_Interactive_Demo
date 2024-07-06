@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transformer Training Visualizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .outer-container {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+        }
+        .module-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .container {
+            background-color: #bae9ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadein 1.7s ease-in-out forwards;
+        }
+        .input-section, .output-section {
+            margin: 20px 0;
+        }
+        .food-section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .food-group {
+            background-color: #cceeff;
+            padding: 20px;
+            border-radius: 5px;
+            width: 45%;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .food-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .food-item input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+        }
+        .submit-button, .continue-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .submit-button:hover, .continue-button:hover {
+            background-color: #0056b3;
+        }
+        .module-text {
+            max-width: 800px;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadein 1.2s ease-in-out forwards;
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body onload="maximizeWindow()">
+    <div class="outer-container">
+        <div class="module-text" style="animation-delay: 1.7s;">
+            <h2>Input Computation</h2>
+            <div class="container" style="animation-delay: 3.4s;">
+                <p>Input computation is the process of creating “binary activation functions.” These are essentially criteria for things the evaluated element either has or doesn’t have (1 or 0). These criteria are often impossible for humans to comprehend, and thus are the only true “black box” part of the program.</p>
+            </div>
+            <div class="container" style="animation-delay: 5.1s;">
+                <p>By feeding elements into the program with the expected output of the element (for instance, a picture of a dog labeled “dog”), the algorithm can start associating these “binary activation functions” with the expected output (with some probability, not all dogs have tails, but 99% do!).</p>
+            </div>
+            <div class="container" style="animation-delay: 6.8s;">
+                <p>Let’s create some criteria for our neural network. We are going to make a neural net that determines if a food is “Tasty.” Please enter three “Tasty” foods and three “Not Tasty” foods.</p>
+            </div>
+        </div>
+        <div class="module-container">
+            <div class="container">
+                <h1>Input Processor</h1>
+                <div class="food-section">
+                    <div class="food-group">
+                        <h2>Tasty Foods</h2>
+                        <div class="food-item">
+                            <span>1)</span>
+                            <input type="text" id="tasty1" placeholder="Enter a tasty food">
+                        </div>
+                        <div class="food-item">
+                            <span>2)</span>
+                            <input type="text" id="tasty2" placeholder="Enter a tasty food">
+                        </div>
+                        <div class="food-item">
+                            <span>3)</span>
+                            <input type="text" id="tasty3" placeholder="Enter a tasty food">
+                        </div>
+                    </div>
+                    <div class="food-group">
+                        <h2>Not Tasty Foods</h2>
+                        <div class="food-item">
+                            <span>1)</span>
+                            <input type="text" id="nottasty1" placeholder="Enter a not tasty food">
+                        </div>
+                        <div class="food-item">
+                            <span>2)</span>
+                            <input type="text" id="nottasty2" placeholder="Enter a not tasty food">
+                        </div>
+                        <div class="food-item">
+                            <span>3)</span>
+                            <input type="text" id="nottasty3" placeholder="Enter a not tasty food">
+                        </div>
+                    </div>
+                </div>
+                <button class="submit-button" onclick="submitFoods()">Submit</button>
+                <div class="output-section">
+                    <p id="activationFunction1"></p>
+                    <p id="activationFunction2"></p>
+                    <p id="continueLink"></p>
+                </div>
+                <p>Please note the criteria generated is meant to be human readable as an example. In an actual neural net the criteria would be far more abstract.</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../eel.js"></script>
+    <script>
+        async function submitFoods() {
+            const tastyFoods = [
+                document.getElementById('tasty1').value,
+                document.getElementById('tasty2').value,
+                document.getElementById('tasty3').value
+            ];
+            const notTastyFoods = [
+                document.getElementById('nottasty1').value,
+                document.getElementById('nottasty2').value,
+                document.getElementById('nottasty3').value
+            ];
+            const combinedFoods = [...tastyFoods, ...notTastyFoods].join('#$@$#@');
+
+            console.log("Combined Foods: ", combinedFoods);
+
+            const result = await eel.generateBinaryActivationFunctions(combinedFoods)();
+            console.log("Result: ", result);
+
+            document.getElementById('activationFunction1').innerText = `Binary activation function for "Tasty": ${result[0]}`;
+            document.getElementById('activationFunction2').innerText = `Binary activation function for "Not Tasty": ${result[1]}`;
+            document.getElementById('continueLink').innerHTML = '<button class="continue-button" onclick="location.href=\'transformerSim.html\'">Continue</button>';
+        }
+
+        function maximizeWindow() {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+        }
+    </script>
+</body>
+</html>
